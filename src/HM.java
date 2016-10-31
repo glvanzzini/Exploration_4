@@ -7,46 +7,56 @@ import java.util.HashMap;
 
 public class HM {
 
-    private static HashMap<Character, Integer> hashMap = new HashMap<>();
+    private static HashMap<Character, Integer> shiftTable = new HashMap<>();
 
     public static void main(String[] args) throws IOException{
 
         BufferedReader input = new BufferedReader(new FileReader("sm.txt"));
         char[] pattern = input.readLine().toCharArray();
+        char[] text = input.readLine().toCharArray();
+        input.close();
 
-
+        long Start = System.nanoTime();
+        System.out.println("Index: " + HorspoolMatching(pattern, text));
+        System.out.println("\nTotal Time: " + (System.nanoTime() - Start));
     }
 
-    // comments are stupid
-    private static void CreateHorspoolTable(){
-        for(char letter : "abcdefghijklmnopqrtuvwxyz".toCharArray()) {
-           hashMap.put(letter, 0);
-        }
-    }
+    //Implements Horspool's algorithm for string matching
+    //Input: Pattern P[0..m-1] and text T[0..n-1]
+    //Output: The index of the left end of the first matching substring
+    //        or -1 if there are no matches
+    private static int HorspoolMatching(char[] P, char T[]){
 
-    private int HorspoolMatching(){
+        ShiftTable(P, T);
 
-        return 0;
-    }
-
-    private char[] ShiftTable(char[] P){
         int m = P.length;
-        int size = 0;
+        int n = T.length;
+        int i = m - 1;
 
+        while (i <= n - 1){
+            int k = 0;
 
+            while(k <= m-1 && P[m-1-k] == T[i-k]){
+                k = k + 1;
+            }
 
-
-        for (int i = 0; i < m; i++){
-
-            for(int j = 0; j < m -2; j++) {
-
-
-
+            if(k==m){
+                return i - m + 1;
+            }
+            else{
+                //i = i + Table[T[i]];
+                i = i + shiftTable.get(T[i]);
             }
         }
-
-        return new char[];
+        return -1;
     }
 
+    //Fills the shift table used by the Horspool's algorithm
+    private static void ShiftTable(char[] P, char[] T){
+        for (char letter : T)
+            shiftTable.put(letter, P.length);
 
+        for( int i = P.length - 2; i >= 0; i--)
+            shiftTable.put(P[i], P.length - 1 -i);
+    }
 }

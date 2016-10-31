@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * Created by jacobmurillo on 10/31/16.
@@ -11,15 +12,14 @@ public class HM {
 
     public static void main(String[] args) throws IOException{
 
-        BufferedReader input = new BufferedReader(new FileReader("sm.dat"));
-        char[] pattern = input.readLine().toCharArray();
-        char[] text = input.readLine().toCharArray();
-        input.close();
+        Scanner input = new Scanner(new File("sm.dat"));
+        char[] pattern = input.nextLine().toCharArray();
+        input.useDelimiter("\\Z");
+        char[] text = input.next().toCharArray();
 
         long Start = System.nanoTime();
         System.out.println("Index: " + HorspoolMatching(pattern, text) +
                 "\nTotal Time: " + (System.nanoTime() - Start));
-
     }
 
     //Implements Horspool's algorithm for string matching
@@ -45,7 +45,6 @@ public class HM {
                 return i - m + 1;
             }
             else{
-                //i = i + Table[T[i]];
                 i = i + shiftTable.get(T[i]);
             }
         }

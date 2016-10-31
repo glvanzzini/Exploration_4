@@ -11,7 +11,7 @@ public class HM {
 
     public static void main(String[] args) throws IOException{
 
-        BufferedReader input = new BufferedReader(new FileReader("sm.txt"));
+        BufferedReader input = new BufferedReader(new FileReader("sm.dat"));
         char[] pattern = input.readLine().toCharArray();
         char[] text = input.readLine().toCharArray();
         input.close();

@@ -6,7 +6,7 @@ import java.io.*;
 public class BF {
     public static void main(String[] args) throws IOException {
 
-        BufferedReader in = new BufferedReader(new FileReader("sm.txt")); //new bufferedReader
+        BufferedReader in = new BufferedReader(new FileReader("sm.dat")); //new bufferedReader
         int count = 0;
         char[] pattern = in.readLine().toCharArray();
         //System.out.println(Arrays.toString(pattern));
@@ -15,7 +15,7 @@ public class BF {
             count++;
         }
         in.close();
-        BufferedReader ch = new BufferedReader(new FileReader("sm.txt"));
+        BufferedReader ch = new BufferedReader(new FileReader("sm.dat"));
         char[] chars = new char[count];
         ch.readLine();
         while(ch.ready()){ //reads in characters again and this time places them in an array

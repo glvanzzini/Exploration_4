@@ -17,8 +17,9 @@ public class HM {
         input.close();
 
         long Start = System.nanoTime();
-        System.out.println("Index: " + HorspoolMatching(pattern, text));
-        System.out.println("\nTotal Time: " + (System.nanoTime() - Start));
+        System.out.println("Index: " + HorspoolMatching(pattern, text) +
+                "\nTotal Time: " + (System.nanoTime() - Start));
+
     }
 
     //Implements Horspool's algorithm for string matching

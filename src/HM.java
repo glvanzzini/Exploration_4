@@ -8,16 +8,22 @@ import java.util.Scanner;
 
 public class HM {
 
+    // this will will the shifting table to hold the characters
     private static HashMap<Character, Integer> shiftTable = new HashMap<>();
 
     public static void main(String[] args) throws IOException{
 
-        Scanner input = new Scanner(new File("sm.dat"));
+        // read the pattern and text into char arrays
+        Scanner input = new Scanner(new File("sm6.dat"));
         char[] pattern = input.nextLine().toCharArray();
         input.useDelimiter("\\Z");
         char[] text = input.next().toCharArray();
+
+        // start the shifting table
         ShiftTable(pattern, text);
         long Start = System.nanoTime();
+
+        // do the Horspool the match and call the timer
         System.out.println("Index: " + HorspoolMatching(pattern, text) +
                 "\nTotal Time: " + (System.nanoTime() - Start));
     }
@@ -39,6 +45,7 @@ public class HM {
                 k = k + 1;
             }
 
+            // do we have a match? if not the just shift based on letter
             if(k==m){
                 return i - m + 1;
             }
@@ -46,14 +53,18 @@ public class HM {
                 i = i + shiftTable.get(T[i]);
             }
         }
+
+        // not match pattern found
         return -1;
     }
 
     //Fills the shift table used by the Horspool's algorithm
     private static void ShiftTable(char[] P, char[] T){
+        // put the text's characters into the hashmap
         for (char letter : T)
             shiftTable.put(letter, P.length);
 
+        // count the pattern's letters into the hashmap count
         for( int i = P.length - 2; i >= 0; i--)
             shiftTable.put(P[i], P.length - 1 -i);
     }

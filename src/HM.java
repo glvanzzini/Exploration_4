@@ -16,7 +16,7 @@ public class HM {
         char[] pattern = input.nextLine().toCharArray();
         input.useDelimiter("\\Z");
         char[] text = input.next().toCharArray();
-
+        ShiftTable(pattern, text);
         long Start = System.nanoTime();
         System.out.println("Index: " + HorspoolMatching(pattern, text) +
                 "\nTotal Time: " + (System.nanoTime() - Start));
@@ -27,8 +27,6 @@ public class HM {
     //Output: The index of the left end of the first matching substring
     //        or -1 if there are no matches
     private static int HorspoolMatching(char[] P, char T[]){
-
-        ShiftTable(P, T);
 
         int m = P.length;
         int n = T.length;

@@ -17,6 +17,7 @@ public class BF {
         in.close();
         BufferedReader ch = new BufferedReader(new FileReader("sm.dat"));
         char[] chars = new char[count];
+        System.out.println(count);
         ch.readLine();
         while(ch.ready()){ //reads in characters again and this time places them in an array
             ch.read(chars);
@@ -27,7 +28,7 @@ public class BF {
 //       }
 //       System.out.println();
         long Start = System.nanoTime();
-        System.out.println(StringMatch(chars, pattern) + "\nTotal Time: " + (System.nanoTime() - Start));
+        System.out.println("Index: " + StringMatch(chars, pattern) + "\nTotal Time: " + (System.nanoTime() - Start) + " nanoseconds");
 
     }
 
